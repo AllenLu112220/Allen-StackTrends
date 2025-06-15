@@ -1,0 +1,8 @@
+<div *ngIf="loading">Loading skills…</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<ul *ngIf="!loading && !error">
+  <li *ngFor="let s of skills">
+    {{ s.name | uppercase }}: {{ s.count | number }} postings
+  </li>
+</ul>

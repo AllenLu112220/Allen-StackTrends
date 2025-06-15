@@ -2,14 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(cors());
+// early in your middleware chain:
+app.use(cors({ origin: 'http://localhost:4200' }));
+
+// if you want to allow any origin (dev only), you can just do:
+// app.use(cors());
+
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('API is running');
-});
-
-const skillsRoutes = require('./routes/skills');
-app.use('/api/skills', skillsRoutes);
+// your routes...
+app.use('/api/skills', require('./routes/skills'));
 
 module.exports = app;
